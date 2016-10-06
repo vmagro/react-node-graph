@@ -7,6 +7,24 @@ import {computeOutOffsetByIndex, computeInOffsetByIndex} from './lib/util';
 
 export default class index extends React.Component {
 
+  static propTypes = {
+    data: React.PropTypes.object,
+    onNodeStartMove: React.PropTypes.func,
+    onNodeMove: React.PropTypes.func,
+    onNewConnector: React.PropTypes.func,
+    classNames: React.PropTypes.shape({
+      node: React.PropTypes.string,
+      nodeHeader: React.PropTypes.string,
+      nodeTitle: React.PropTypes.string,
+      nodeContent: React.PropTypes.string,
+      nodeInputWrapper: React.PropTypes.string,
+      nodeInputList: React.PropTypes.string,
+      nodeOutputWrapper: React.PropTypes.string,
+      nodeOutputList: React.PropTypes.string,
+      connector: React.PropTypes.string,
+    }).isRequired,
+  }
+
 	constructor(props) {
 		super(props);
 
@@ -125,10 +143,11 @@ export default class index extends React.Component {
 			let connectorStart = computeOutOffsetByIndex(sourceNode.x, sourceNode.y, this.state.source[1]);
 			let connectorEnd = {x:this.state.mousePos.x, y:this.state.mousePos.y};
 					
-			newConnector = <Spline 
-              				 start={connectorStart}
-              				 end={connectorEnd}
-              			 />
+      newConnector = <Spline
+        connectorClass={this.props.classNames.connector}
+        start={connectorStart}
+        end={connectorEnd}
+      />
 		}
 
 		let splineIndex = 0;
@@ -136,7 +155,15 @@ export default class index extends React.Component {
 		return (
 			<div>
 				{nodes.map((node)=> {
-					return <Node 
+          return <Node
+                    nodeClass={this.props.classNames.node}
+                    nodeHeaderClass={this.props.classNames.nodeHeader}
+                    nodeTitleClass={this.props.classNames.nodeTitle}
+                    nodeContentClass={this.props.classNames.nodeContent}
+                    nodeInputWrapperClass={this.props.classNames.nodeInputWrapper}
+                    nodeInputListClass={this.props.classNames.nodeInputList}
+                    nodeOutputWrapperClass={this.props.classNames.nodeOutputWrapper}
+                    nodeOutputListClass={this.props.classNames.nodeOutputList}
     								index={i++} 
     								nid={node.nid}
     								color="#000000"
@@ -166,7 +193,8 @@ export default class index extends React.Component {
 						let splinestart = computeOutOffsetByIndex(fromNode.x, fromNode.y, this.computePinIndexfromLabel(fromNode.fields.out, connector.from));
 						let splineend = computeInOffsetByIndex(toNode.x, toNode.y, this.computePinIndexfromLabel(toNode.fields.in, connector.to));
 
-						return <Spline 
+            return <Spline
+              connectorClass={this.props.classNames.connector}
 							start={splinestart}
 							end={splineend}
 							key={splineIndex++}

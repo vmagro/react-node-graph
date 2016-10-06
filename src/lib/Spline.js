@@ -21,7 +21,7 @@ export default class Spline extends React.Component {
                 <g>
                 <circle cx={start.x} cy={start.y} r="3"  fill="#337ab7" />
                 <circle cx={end.x} cy={end.y} r="3"  fill="#9191A8" />
-                <path className="connector" d={pathString} />
+                <path className={this.props.connectorClass} d={pathString} />
                 </g>
                 
         

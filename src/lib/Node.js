@@ -31,25 +31,35 @@ export default class Node extends React.Component {
     this.props.onCompleteConnector(this.props.nid, index);
   }
 
-	render() {
-		return (
-      <Draggable 
+  render() {
+    return (
+      <Draggable
         start={{x:this.props.pos.x,y:this.props.pos.y}}
-        handle=".node-header"
+        handle={this.props.nodeHeaderClass}
         onStart={(event, ui)=>this.handleDragStart(event, ui)}
         onStop={(event, ui)=>this.handleDragStop(event, ui)}
         onDrag={(event, ui)=>this.handleDrag(event, ui)}>
-			<section className="node" style={{zIndex:10000}}>
-          <header className="node-header" style={{backgroundColor:this.props.color}}>                      
-            <span className="node-title">{this.props.title}</span>
+        <section className={this.props.nodeClass} style={{zIndex:10000}}>
+          <header className={this.props.nodeHeaderClass} style={{backgroundColor:this.props.color}}>
+            <span className={this.props.nodeTitleClass}>{this.props.title}</span>
           </header>
-          <div className="node-content">
-            <NodeInputList items={this.props.inputs} onCompleteConnector={(index)=>this.onCompleteConnector(index)} />
-            <NodeOuputList items={this.props.outputs} onStartConnector={(index)=>this.onStartConnector(index)} />
+          <div className={this.props.nodeContentClass}>
+            <NodeInputList
+              inputWrapperClass={this.props.nodeInputWrapperClass}
+              inputListClass={this.props.nodeInputListClass}
+              items={this.props.inputs}
+              onCompleteConnector={(index)=>this.onCompleteConnector(index)}
+            />
+            <NodeOuputList
+              outputWrapperClass={this.props.nodeOutputWrapperClass}
+              outputListClass={this.props.nodeOutputListClass}
+              items={this.props.outputs}
+              onStartConnector={(index)=>this.onStartConnector(index)}
+            />
           </div>
-      </section>
+        </section>
       </Draggable>
-		);
-	}
+    );
+  }
 }
 
