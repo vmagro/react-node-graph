@@ -12,8 +12,8 @@ export default class NodeInputList extends React.Component {
 		let i = 0;
 
 		return (
-			<div className="nodeInputWrapper">
-				<ul className="nodeInputList">
+			<div className={this.props.inputWrapperClass}>
+				<ul className={this.props.inputListClass}>
 					{this.props.items.map((item) => {
 						return (
 							<NodeInputListItem onMouseUp={(i)=>this.onMouseUp(i)} key={i} index={i++} item={item} />

@@ -35,7 +35,7 @@ export default class Node extends React.Component {
     return (
       <Draggable
         start={{x:this.props.pos.x,y:this.props.pos.y}}
-        handle={this.props.nodeHeaderClass}
+        handle={'.' + this.props.nodeHeaderClass}
         onStart={(event, ui)=>this.handleDragStart(event, ui)}
         onStop={(event, ui)=>this.handleDragStop(event, ui)}
         onDrag={(event, ui)=>this.handleDrag(event, ui)}>
