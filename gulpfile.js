@@ -8,7 +8,7 @@ const del = require('del');
 
 const babelConfig = require('./babel');
 
-gulp.task('build', ['clean'], function () {
+gulp.task('build', ['clean', 'lint'], function () {
   return gulp.src('./src/**/*.js')
     .pipe(plumber())
     .pipe(sourcemaps.init())
